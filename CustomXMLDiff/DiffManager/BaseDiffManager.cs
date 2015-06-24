@@ -6,6 +6,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Xml;
+using System.Xml.XPath;
 
 namespace CustomXMLDiff.DiffManager
 {
@@ -144,5 +145,63 @@ namespace CustomXMLDiff.DiffManager
             throw new ArgumentException("Couldn't find element within parent");
         }
 
+
+
+        public XmlDocument ApplyChanges(BaseDiffResultObjectList results, XmlNode originalDocument)
+        {
+            XmlDocument resultDocument = new XmlDocument();
+            XPathNavigator navigator = originalDocument.CreateNavigator();
+            foreach (var item in results.Items)
+            {
+                GetCommonNode(item, ref navigator);
+            }
+            resultDocument.LoadXml(navigator.OuterXml);
+            return resultDocument;
+        }
+
+        private void GetCommonNode(BaseDiffResultObject item, ref XPathNavigator navigator)
+        {
+            
+            switch(item.State)
+            {
+                case DiffState.Added:
+                    {
+                       var nav = navigator.SelectSingleNode(item.XPath);
+                       if (nav != null)
+                       {
+                           XmlElement el = (XmlElement)item.ChangedNode;
+                           el.SetAttribute("patchState", "Added");
+                           if (item.XPath.Substring(item.XPath.LastIndexOf("/")).Contains(item.ChangedNode.Name))
+                               nav.InsertAfter(el.OuterXml);
+                           else
+                           nav.AppendChild(el.OuterXml);
+                       }
+                        break;
+                    }
+                case DiffState.Changed:
+                    {
+                       var nav =  navigator.SelectSingleNode(item.XPath);
+                       if (nav != null)
+                       {
+                           XmlElement el = (XmlElement)item.OriginalNode;
+                           el.SetAttribute("patchState", "Changed");
+                           el.SetAttribute("changedValue", item.ChangedNode.OuterXml);
+                           nav.ReplaceSelf(el.OuterXml);
+                       }
+                        break;
+                    }
+                case DiffState.Removed:
+                    {
+                        var nav = navigator.SelectSingleNode(item.XPath);
+                        if (nav != null)
+                        {
+                            XmlElement el = (XmlElement)item.OriginalNode;
+                            el.SetAttribute("patchState", "Removed");
+                            nav.ReplaceSelf(el.OuterXml);
+                        }
+                        break;
+                    }
+        }
+        }
     }
 }
