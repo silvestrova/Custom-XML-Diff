@@ -1,9 +1,0 @@
-E:\MySites\CustomXMLDiff\CustomXMLDiff\bin\Debug\CustomXMLDiff.dll
-E:\MySites\CustomXMLDiff\CustomXMLDiff\bin\Debug\CustomXMLDiff.pdb
-E:\MySites\CustomXMLDiff\CustomXMLDiff\obj\Debug\CustomXMLDiff.dll
-E:\MySites\CustomXMLDiff\CustomXMLDiff\obj\Debug\CustomXMLDiff.pdb
-E:\MySites\GitHub\CustomXMLDiff\Custom-XMLDiff\CustomXMLDiff\obj\Debug\CustomXMLDiff.csprojResolveAssemblyReference.cache
-E:\MySites\GitHub\CustomXMLDiff\Custom-XMLDiff\CustomXMLDiff\obj\Debug\CustomXMLDiff.dll
-E:\MySites\GitHub\CustomXMLDiff\Custom-XMLDiff\CustomXMLDiff\bin\Debug\CustomXMLDiff.dll
-E:\MySites\GitHub\CustomXMLDiff\Custom-XMLDiff\CustomXMLDiff\bin\Debug\CustomXMLDiff.pdb
-E:\MySites\GitHub\CustomXMLDiff\Custom-XMLDiff\CustomXMLDiff\obj\Debug\CustomXMLDiff.pdb
